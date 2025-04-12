@@ -5,9 +5,9 @@ class Solution {
 		int result = Integer.MAX_VALUE;
 		for (int right = 0; right < nums.length ; right++){
 			sum += nums[right];
-			while (sum >= s){
+			while (sum >= s){  //not if
 				result = Math.min(result, right - left + 1);
-				sum -= nums[left++];
+				sum -= nums[left++];// sub to sum < s
 			}
 		}	
 		
