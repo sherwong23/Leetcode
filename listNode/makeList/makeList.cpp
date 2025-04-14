@@ -103,13 +103,29 @@ class MyLinkedList {
         while (cur->next != nullptr && cur->next->next != nullptr){
             temp1 = cur->next;
             temp2 = cur->next->next->next;
-            
+        //change three next using two temp       
             cur->next = cur->next->next;
             cur->next->next = temp1;
             cur->next->next->next = temp2;
             
             cur = cur->next->next;
         }
+    }
+
+    void removeNthfromEnd(int n) {
+        LinkedNode* slow = _head;
+        LinkedNode* fast = _head;
+        while(n--) {
+            fast = fast->next;
+        }
+        while(fast->next != nullptr) {
+            fast = fast->next;
+            slow = slow->next;
+        }
+        //delete the element after slow
+        LinkedNode* temp = slow->next;
+        slow->next = temp->next;
+        delete temp;
     }
 private:
     int _size;
@@ -131,6 +147,8 @@ int main() {
     list.reverseList();
     list.printLinkedList();
     list.swapPairs();
+    list.printLinkedList();
+    list.removeNthfromEnd(2);
     list.printLinkedList();
 
     cout << "== 获取节点 ==" << endl;
