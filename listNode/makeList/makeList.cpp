@@ -80,6 +80,23 @@ class MyLinkedList {
         };
         cout << "null" << endl;
     }
+
+    void reverseList() {
+        LinkedNode* cur = _head->next;
+        LinkedNode* tem = NULL;
+        LinkedNode* pre = NULL;
+        while (cur != nullptr){
+            //update cur  
+            tem = cur;
+            cur = cur->next;
+            //work with tem to reverse
+            tem->next = pre;
+            pre = tem;
+        }
+        _head->next = pre;
+    }
+
+            
 private:
     int _size;
     LinkedNode* _head;
@@ -97,6 +114,8 @@ int main() {
     list.addAtTail(5);
     list.addAtIndex(1, 15);  // 在下标1插入15
     list.printLinkedList(); // 预期输出: 20 15 10 5
+    list.reverseList();
+    list.printLinkedList();
 
     cout << "== 获取节点 ==" << endl;
     cout << "index 0: " << list.get(0) << endl; // 20
