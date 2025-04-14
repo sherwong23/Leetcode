@@ -127,12 +127,40 @@ class MyLinkedList {
         slow->next = temp->next;
         delete temp;
     }
-private:
     int _size;
     LinkedNode* _head;
 
 };
 
+class Solution{
+    public:
+           MyLinkedList  getIntersectionNode(MyLinkedList&  list1, MyLinkedList&  list2) {
+               //two cur
+               MyLinkedList::LinkedNode* cur1 = list1._head;
+               MyLinkedList::LinkedNode* cur2 = list2._head;
+               //cut the longer list
+               int diff = -2;
+               if (diff < 0){
+                   while (diff < 0){
+                       cur2 = cur2->next;
+                       diff++;
+                   }
+               }
+               else{
+                   while (diff--){
+                       cur1 = cur1->next;
+                   }
+               }
+               while (cur1 == nullptr || cur1 != cur2){
+                    cur1 = cur1->next;
+                    cur2 = cur2->next;
+                }
+               MyLinkedList result;
+               result._head->next = cur1;
+               return result;
+           }
+
+};
 // 上記の MyLinkedList クラスがここにあると仮定します（省略）
 
 int main() {
@@ -143,28 +171,40 @@ int main() {
     list.addAtHead(20);
     list.addAtTail(5);
     list.addAtIndex(1, 15);  // 在下标1插入15
-    list.printLinkedList(); // 预期输出: 20 15 10 5
+    //list.printLinkedList(); // 预期输出: 20 15 10 5
     list.reverseList();
-    list.printLinkedList();
+    //list.printLinkedList();
     list.swapPairs();
-    list.printLinkedList();
+    //list.printLinkedList();
     list.removeNthfromEnd(2);
     list.printLinkedList();
 
-    cout << "== 获取节点 ==" << endl;
-    cout << "index 0: " << list.get(0) << endl; // 20
-    cout << "index 2: " << list.get(2) << endl; // 10
-    cout << "index 4: " << list.get(4) << endl; // -1（越界）
+    MyLinkedList list2;
+    list2.addAtHead(23);
+    list2.addAtHead(14);
+    list2._head->next->next->next = list._head->next;
+    
+    Solution sol;
+    MyLinkedList list3;
+
+    list3 = sol.getIntersectionNode(list, list2);
+    list3.printLinkedList();
+
+
+    //cout << "== 获取节点 ==" << endl;
+    //cout << "index 0: " << list.get(0) << endl; // 20
+    //cout << "index 2: " << list.get(2) << endl; // 10
+    //cout << "index 4: " << list.get(4) << endl; // -1（越界）
 
     cout << "== 删除节点 ==" << endl;
     list.deleteAtIndex(1); // 删除值为15的节点
-    list.printLinkedList(); // 预期输出: 20 10 5
+    //list.printLinkedList(); // 预期输出: 20 10 5
 
     list.deleteAtIndex(0); // 删除头部节点（20）
-    list.printLinkedList(); // 预期输出: 10 5
+    //list.printLinkedList(); // 预期输出: 10 5
 
     list.deleteAtIndex(5); // 越界，无操作
-    list.printLinkedList(); // 仍是: 10 5
+    //list.printLinkedList(); // 仍是: 10 5
 
     return 0;
 }
