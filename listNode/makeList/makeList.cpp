@@ -96,7 +96,21 @@ class MyLinkedList {
         _head->next = pre;
     }
 
+    void swapPairs() {
+        LinkedNode* temp1 = NULL;
+        LinkedNode* temp2 = NULL;
+        LinkedNode* cur = _head;
+        while (cur->next != nullptr && cur->next->next != nullptr){
+            temp1 = cur->next;
+            temp2 = cur->next->next->next;
             
+            cur->next = cur->next->next;
+            cur->next->next = temp1;
+            cur->next->next->next = temp2;
+            
+            cur = cur->next->next;
+        }
+    }
 private:
     int _size;
     LinkedNode* _head;
@@ -115,6 +129,8 @@ int main() {
     list.addAtIndex(1, 15);  // 在下标1插入15
     list.printLinkedList(); // 预期输出: 20 15 10 5
     list.reverseList();
+    list.printLinkedList();
+    list.swapPairs();
     list.printLinkedList();
 
     cout << "== 获取节点 ==" << endl;
