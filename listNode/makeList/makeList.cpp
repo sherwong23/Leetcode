@@ -139,6 +139,7 @@ class Solution{
                MyLinkedList::LinkedNode* cur1 = list1._head;
                MyLinkedList::LinkedNode* cur2 = list2._head;
                //cut the longer list
+               //define the diff = 2
                int diff = -2;
                if (diff < 0){
                    while (diff < 0){
