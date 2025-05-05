@@ -45,6 +45,23 @@ public:
     if (root->val > key) root->left = deleteNode(root->left, key);
     return root;
     }
+    //第二种,简单方法
+    TreeNode* deleteNode2(TreeNode* root, int key) {
+        if (root == nullptr) return root;
+        if (root->val == key) {
+            if (root->right == nullptr) { // 这里第二次操作目标值：最终删除的作用
+                return root->left;
+            }
+            TreeNode *cur = root->right;
+            while (cur->left) {
+                cur = cur->left;
+            }
+            swap(root->val, cur->val); // 这里第一次操作目标值：交换目标值其右子树最左面节点。
+        }
+        root->left = deleteNode(root->left, key);
+        root->right = deleteNode(root->right, key);
+        return root;
+    }
 };
 
 void inorder(TreeNode* root) {
@@ -72,7 +89,7 @@ int main() {
     cout << endl;
 
     Solution sol;
-    root = sol.deleteNode(root, 3); // 删除节点 3
+    root = sol.deleteNode2(root, 3); // 删除节点 3
 
     cout << "After deletion (inorder): ";
     inorder(root);
