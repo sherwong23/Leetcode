@@ -14,6 +14,7 @@ private:
         }
 
         for (int i = startIndex; i < nums.size(); i++) {
+            //used 意味着已经加上去了,为上下关系,false意味着同级,上次使用过后已经重制了
             if (i > 0 && nums[i] == nums[i - 1] && used[i - 1] == false) {
                 continue;
             }
