@@ -11,6 +11,7 @@ private:
                     for (char k = '1'; k <= '9'; k++) {
                         if (isValid(i, j, k, board)) {
                             board[i][j] = k;
+                            //如果往后一直true就可以返回否则就撤回
                             if (backtracking(board)) return true;
                             board[i][j] = '.';
                         }
