@@ -52,7 +52,7 @@ public:
 
 int main() {
     Solution sol;
-    vector<vector<string>> result = sol.nQueen(4);
+    vector<vector<string>> result = sol.nQueen(5);
     for (auto& solve : result) {
         for (string row : solve) {
             cout << "[ ";
